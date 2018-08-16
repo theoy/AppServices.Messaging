@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package 
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" 
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" 
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" 
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" 
+  IgnorableNamespaces="mp uap uap3 rescap desktop">
+
+  <Identity
+    Name="b752f9a1-ff97-45e6-ae35-8d32c1f2df3c"
+    Publisher="CN=shweaver"
+    Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>AppServices Messaging Sample</DisplayName>
+    <PublisherDisplayName>shweaver</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="AppServices Messaging Sample"
+        Description="PackagingProject"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile
+          Wide310x150Logo="Assets\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <desktop:Extension Category="windows.fullTrustProcess" Executable="AppServices.Messaging.Sample.Net\AppServices.Messaging.Sample.Net.exe">
+          <desktop:FullTrustProcess>
+            <desktop:ParameterGroup GroupId="SyncGroup" Parameters="/Sync" />
+            <desktop:ParameterGroup GroupId="OtherGroup" Parameters="/Other" />
+          </desktop:FullTrustProcess>
+        </desktop:Extension>
+        <uap:Extension Category="windows.appService" EntryPoint="AppServices.Messaging.MessageService.MessengerTask">
+          <uap:AppService Name="com.messaging.appservices" />
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="messaging" />
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>
